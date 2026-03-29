@@ -1,127 +1,89 @@
-# BotCraft AI - Low Code AI Agent and Chatbot Builder
+# 5 Domain-Specialized AI Agents with Compliance Guardrails
 
-BotCraft AI is a powerful platform that allows users to create custom AI chatbots trained on their own data without writing a single line of code. By leveraging RAG (Retrieval-Augmented Generation), you can ingest PDFs, CSV files, text files, or URLs, and build intelligent bots that answer questions based on your specific content.
+## PROBLEM STATEMENT
+Build a domain-specific AI agent for healthcare, finance, supply chain, or agriculture that executes domain workflows, handles edge cases properly, and stays within regulatory and policy guardrails at all times.
 
-## Features
+## WHAT YOU MAY BUILD
+* **Healthcare operations agents** — that handle medical coding, claims adjudication, or prior authorization workflows — navigating complex rule sets (International Classification of Diseases (ICD-10), Current Procedural Terminology (CPT), payer-specific policies) with auditable reasoning at each step.
+* **Financial close agents** — that run reconciliation, generate compliance-ready reports, flag anomalies, and maintain audit trails across regulatory frameworks.
+* **Supply chain intelligence agents** — that detect disruption signals (port delays, weather, supplier issues), model ripple effects, and trigger rerouting or reorder actions autonomously.
+* **Agricultural advisory agents** — that work with multi-modal inputs (soil data, weather, market prices, voice in local languages) to deliver actionable guidance to farmers — even in low-connectivity environments.
 
--   **Custom Chatbot Creation**: Create multiple distinct chatbots, each with its own knowledge base.
--   **RAG Powered**: Uses advanced RAG techniques to retrieve relevant context from uploaded documents and websites.
--   **Visual Workflow Builder**: Create complex AI agent workflows using a drag-and-drop interface powered by React Flow and LangGraph. Connect LLMs, Doc writers, Email nodes, and MCP servers.
--   **Voice Agents**: Experience interactive real-time voice conversations using LiveKit.
--   **Multi-Channel Deployment**: Instantly deploy your bots to Telegram and WhatsApp Business.
--   **Document Extraction & Generation**: Supports uploading PDFs, CSVs, and URLs. Generates Word documents, Excel spreadsheets, PowerPoint presentations, and Google Sheets, straight from your chatbot workflows.
--   **MCP Integration**: Connect to local Model Context Protocol (MCP) servers to extend your agent's capabilities with custom tools and scripts.
--   **Dashboard & Analytics**: A centralized dashboard to manage your bots, view stats, and monitor usage.
--   **Secure Authentication**: User management and data security powered by Supabase.
+## TECH STACK
 
-## Tech Stack
+**Frontend**:
+- **Framework**: React 18 with Vite
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS / UI styling tools
+- **Flow Builder**: React Flow (xyflow)
+- **Animations & Icons**: Framer Motion, Lucide React
+- **Real-time Components**: LiveKit
 
-### Frontend
--   **Framework**: [React](https://react.dev/)
--   **Build Tool**: [Vite](https://vitejs.dev/)
--   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
--   **Visual Editor**: [React Flow](https://reactflow.dev/)
--   **Voice Integration**: [LiveKit Components](https://livekit.io/)
--   **Animations**: [Framer Motion](https://www.framer.com/motion/)
--   **Routing**: [React Router](https://reactrouter.com/)
+**Backend**:
+- **Framework**: FastAPI (Python 3.13+)
+- **AI Orchestration**: LangChain, LangGraph, Google GenAI
+- **Real-time Agents**: LiveKit Agents
+- **Vector Database (RAG)**: ChromaDB, HuggingFace Embeddings
+- **Tools & Capabilities**: Web Search (DuckDuckGo, Tavily), Web Scraping (BeautifulSoup4), Document Parsing (PyPDF, OpenPyXL, Pandas)
 
-### Backend
--   **Framework**: [FastAPI](https://fastapi.tiangolo.com/)
--   **AI Orchestration**: [LangChain](https://python.langchain.com/) & [LangGraph](https://langchain-ai.github.io/langgraph/)
--   **Real-time Voice**: [LiveKit Server](https://livekit.io/)
--   **LLM Provider**: [Google GenAI (Gemini)](https://ai.google.dev/)
--   **Vector Store**: [ChromaDB](https://www.trychroma.com/)
--   **Database**: [Supabase](https://supabase.com/)
+**Database & Auth**:
+- **BaaS**: Supabase
 
-## Getting Started
+## LOCAL SETUP GUIDE
 
-Follow these steps to set up BotCraft AI locally.
+Follow these steps to clone and run the project locally on your machine.
 
 ### Prerequisites
+- **Node.js** (v18 or newer)
+- **Python** (3.13 or newer)
+- **uv** (Optional but recommended for faster Python package management) or standard `pip`
 
--   [Node.js](https://nodejs.org/) (v16 or higher)
--   [Python](https://www.python.org/) (v3.10 or higher)
--   A [Supabase](https://supabase.com/) project
--   A [Google Cloud](https://console.cloud.google.com/) project with Gemini API enabled
--   *(Optional)* Google Cloud OAuth Credentials for Google Sheets/Docs/Slides integrations
--   *(Optional)* Twilio WhatsApp Developers API credentials
--   *(Optional)* Telegram Bot token
--   *(Optional)* LiveKit Server for Voice integrations
+### 1. Clone the Repository
+```bash
+git clone https://github.com/AniketKakde04/Domain-Specialized-Agent.git
+cd Domain-Specialized-Agent
+```
 
-### Backend Setup
+### 2. Set up the Backend
+Navigate to the `backend` directory, create a virtual environment, and install the dependencies:
 
-1.  Navigate to the backend directory:
-    ```bash
-    cd backend
-    ```
+```bash
+cd backend
 
-2.  Create and activate a virtual environment:
-    ```bash
-    python -m venv venv
-    # Windows
-    venv\Scripts\activate
-    # macOS/Linux
-    source venv/bin/activate
-    ```
+# If using uv (recommended since a uv.lock exists)
+uv venv
+uv sync
 
-3.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+# Or using standard pip
+python -m venv .venv
+# On Windows:
+.venv\Scripts\activate
+# On Mac/Linux:
+# source .venv/bin/activate
+pip install -e .
+```
 
-4.  Create a `.env` file in the `backend` directory. Refer to the codebase for the required keys. Main ones include:
-    ```env
-    GEMINI_API_KEY=your_gemini_api_key
-    SUPABASE_URL=your_supabase_url
-    SUPABASE_KEY=your_supabase_anon_key
-    SUPABASE_SERVICE_KEY=your_supabase_service_role_key
-    
-    # Workflow Integrations (Optional, refer to workflow_engine.py for all nodes)
-    EMAIL_USER=your_email@gmail.com
-    EMAIL_PASS=your_app_password
-    TWILIO_ACCOUNT_SID=your_twilio_sid
-    TWILIO_AUTH_TOKEN=your_twilio_auth_token
-    TWILIO_FROM_NUMBER=whatsapp:you_number
-    GOOGLE_CLIENT_ID=your_google_client_id
-    GOOGLE_CLIENT_SECRET=your_google_client_secret
-    LIVEKIT_URL=your_livekit_url
-    LIVEKIT_API_KEY=your_livekit_key
-    LIVEKIT_API_SECRET=your_livekit_secret
-    WHATSAPP_VERIFY_TOKEN=your_whatsapp_webhook_token
-    ```
+*Note: Make sure to create a `.env` file inside the `backend` directory and add the necessary environment variables (e.g., Google GenAI, LiveKit, Supabase credentials) before starting.*
 
-5.  Run the backend server:
-    ```bash
-    uvicorn main:app --reload
-    ```
-    The server will start at `http://localhost:8000`.
+Run the FASTAPI backend server:
+```bash
+uvicorn main:app --reload
+```
+The backend API should now be running at `http://localhost:8000`.
 
-### Frontend Setup
+### 3. Set up the Frontend
+Open a new terminal window, navigate to the `frontend` directory, and install dependencies:
 
-1.  Navigate to the frontend directory:
-    ```bash
-    cd frontend
-    ```
+```bash
+cd frontend
+npm install
+```
 
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
+*Note: Create a `.env` file inside the `frontend` directory with your frontend environment variables.*
 
-3.  Start the development server:
-    ```bash
-    npm run dev
-    ```
-    The application will be available at `http://localhost:5173`. Optionally, configure `.env` variables if required by Vite (e.g. `VITE_SUPABASE_URL`).
+Start the Vite development server:
+```bash
+npm run dev
+```
 
-## Usage
-
-1.  Sign up or log in using the authentication page.
-2.  Go to the Dashboard and click "Create New Bot".
-3.  Name your bot and upload a PDF, CSV file, Text file, or provide a URL to train it.
-4.  Once ingested, click on the **Workflow** tab to set up custom LLM graphs, connecting LangGraph-based logic for document parsing, MCP integrations, emails, or just standard RAG querying.
-5.  Link your workflow to your Bot, or proceed to chat with it utilizing RAG natively! Use multi-channel outputs to deploy and interact with your AI anywhere (Web, Voice, WhatsApp, Telegram).
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
+The app should now be accessible at `http://localhost:5173`.
