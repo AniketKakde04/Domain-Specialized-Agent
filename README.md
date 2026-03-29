@@ -9,6 +9,14 @@ Build a domain-specific AI agent for healthcare, finance, supply chain, or agric
 * **Supply chain intelligence agents** — that detect disruption signals (port delays, weather, supplier issues), model ripple effects, and trigger rerouting or reorder actions autonomously.
 * **Agricultural advisory agents** — that work with multi-modal inputs (soil data, weather, market prices, voice in local languages) to deliver actionable guidance to farmers — even in low-connectivity environments.
 
+## 📱 MULTI-CHANNEL INTEGRATION
+
+Reach your users wherever they are. This platform supports seamless integration with:
+
+* **WhatsApp Business API**: Connect your bots to WhatsApp using Meta's Cloud API. Reach users on their most-used messaging app with automated workflows and compliance guardrails.
+* **Telegram**: Instant connectivity via Telegram Bot Father. Perfect for lightweight, private, and secure domain-specific assistance.
+* **Real-time Voice**: Built-in support for low-latency voice conversations using **LiveKit** and **Sarvam AI** (Bulbul/Saaras models), specifically optimized for Indian languages and accents.
+
 ## TECH STACK
 
 **Frontend**:
